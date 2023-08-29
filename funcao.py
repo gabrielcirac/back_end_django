@@ -7,5 +7,10 @@ livro = "1984"
 autor = "George Orwel"
 print_livro(livro, autor)
 
-# Faça uma função para calcular o IMC de uma pessoa
-# IMC = peso/(altura^2)
+
+def calcular_imc(altura, peso):
+    imc = (peso)/(altura**2)
+    return imc
+
+
+print("IMC: %.2f" % calcular_imc(1.81, 78))
