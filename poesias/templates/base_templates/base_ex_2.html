@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Meu Site{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <!-- Um exemplo simples de menu -->
+            <a href="/">Home</a>
+            <a href="/sobre">Sobre</a>
+        </nav>
+        {% block header %}{% endblock %}
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        {% block footer %}Todos os direitos reservados. Meu Site 2023.{% endblock %}
+    </footer>
+</body>
+</html>

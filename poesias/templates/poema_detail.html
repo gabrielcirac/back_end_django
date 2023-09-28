@@ -1,0 +1,32 @@
+{% load static %}
+{% include "base_templates/header.html"%}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" type="text/css" href="{% static '/styles.css' %}" />
+    <title>Detalhes do Poema usando Fake Factory</title>
+</head>
+
+<body>
+
+    <h1>Detalhes do Poema</h1>
+
+    <h1>{{ poetry.title }}</h1>
+    <p>Por: {{ poetry.author.first_name }} {{ poetry.author.last_name }}</p>
+    <p>Gênero: {{ poetry.genre.name }}</p>
+    <img src="{{ poetry.cover.url }}" alt="{{ poetry.title }}">
+
+    {% if poetry.is_popular %}
+    <p>🌟 Esta é uma poesia popular!</p>
+    {% endif %}
+
+    <p>{{ poetry.full_text }}</p>
+
+
+
+</body>
+
+</html>
+{% include "base_templates/footer.html"%}

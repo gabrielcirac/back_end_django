@@ -1,0 +1,17 @@
+{% load static %}
+{% include "base_templates/header.html"%}
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" type="text/css" href="{% static '/styles.css' %}" />
+    <title>Sobre a Nossa Empresa</title>
+</head>
+
+{% for poesia in poesias %}
+    <h2>{{ poesia.title }}</h2>
+    <img src="{{ poesia.cover.url }}" alt="{{ poesia.title }}">
+    <p>{{ poesia.full_text }}</p>
+    <p>Written by: {{ poesia.author.first_name }} {{ poesia.author.last_name }}</p>
+    <p>Genre: {{ poesia.genre.name }}</p>
+{% endfor %}
+
+{% include "base_templates/footer.html"%}
