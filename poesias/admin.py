@@ -1,6 +1,7 @@
-from django.contrib import admin
-import poesias.models as models
 from django.utils.html import mark_safe
+import poesias.models as models
+from django.contrib import admin
+
 
 admin.site.register(models.Categoria)
 admin.site.register(models.Autor)

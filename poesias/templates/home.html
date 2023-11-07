@@ -1,8 +1,7 @@
+{% extends "base_templates/header.html"%}
 {% load static %}
-{% include "base_templates/header.html"%}
-<!DOCTYPE html>
-<html>
 
+{% block content %}
 <head>
     <meta charset="UTF-8" />
     <link rel="stylesheet" type="text/css" href="{% static '/styles.css' %}" />
@@ -16,6 +15,5 @@
     <p style="color: rgb(15, 69, 53)">Olá Mundo. Essa aqui é a minha Página Django!</p>
 
 </body>
-
-</html>
 {% include "base_templates/footer.html"%}
+{% endblock content %}
