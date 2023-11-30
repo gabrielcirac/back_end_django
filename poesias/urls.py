@@ -6,10 +6,10 @@ from django.conf import settings
 app_name = 'poesias'
 
 urlpatterns = [
-    path('', views.home_view, name='home'),
-    path('sobre/', views.sobre_view, name='sobre'),
-    path('blog/', views.blog_view),
-    path('user/<str:username>/', views.user_view, name='user'),
+    path('', views.HomeView.as_view(), name='home'),
+    path('sobre/', views.SobreView.as_view(), name='sobre'),
+    path('blog/', views.BlogView.as_view),
+    path('user/<str:username>/', views.UserView.as_view(), name='user'),
 
     # Passando parâmtros dinâmicamente
     path('poemas/<int:poema_id>/', views.poema_text, name='poema_text'),
@@ -32,7 +32,7 @@ urlpatterns = [
     path('search/', views.search, name='search'),
 
     # Form
-    path('register/', views.register_view, name='register_view'),
+    path('register/', views.RegisterView.as_view(), name='register_view'),
 
     # Login
     path('login/', views.user_login_view, name='login'),
@@ -40,6 +40,9 @@ urlpatterns = [
 
     # Logout
     path('logout/', views.user_logout_view, name='logout'),
+
+    # Exibir Imagens de Livros no Banco
+    path('lista_livros/', views.lista_livros, name='lista_livros'),
 
 ]
 

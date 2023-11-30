@@ -1,19 +1,11 @@
-{% extends "base_templates/header.html"%}
+{% include "base_templates/header.html"%}
 {% load static %}
 
-{% block content %}
 <head>
     <meta charset="UTF-8" />
     <link rel="stylesheet" type="text/css" href="{% static '/styles.css' %}" />
     <title>Sobre a Nossa Empresa</title>
 </head>
 
-<body>
 
-    <h1>Minha Página Django</h1>
-
-    <p style="color: rgb(15, 69, 53)">Olá Mundo. Essa aqui é a minha Página Django!</p>
-
-</body>
 {% include "base_templates/footer.html"%}
-{% endblock content %}

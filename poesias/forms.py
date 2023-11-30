@@ -18,6 +18,11 @@ class RegisterForm(forms.ModelForm):
             'password',
         ]
 
+        labels = {
+            'first_name': 'Primeiro Nome',
+            'last_name': 'Sobrenome',
+        }
+
     def clean_email(self):
         email = self.cleaned_data.get('email', '')
         exists = User.objects.filter(email=email).exists()

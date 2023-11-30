@@ -1,3 +1,7 @@
+from django.views.generic.edit import FormView
+from .forms import RegisterForm  # Importe seu RegisterForm
+from django.urls import reverse_lazy
+from poesias.models import Livro
 from django.contrib import messages
 from poesias.forms import RegisterForm
 from django.shortcuts import redirect
@@ -9,22 +13,24 @@ from .models import Autor
 from poesias.utils.fabrica import fazer_poema
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.views.generic import TemplateView, View
 
 
-def home_view(request):
-    return render(request, 'home.html')
+class HomeView(TemplateView):
+    template_name = 'home.html'
 
 
-def sobre_view(request):
-    return render(request, 'sobre.html')
+class SobreView(TemplateView):
+    template_name = 'sobre.html'
 
 
-def blog_view(request):
-    return render(request, 'blog.html')
+class BlogView(TemplateView):
+    template_name = 'blog.html'
 
 
-def user_view(request, username):
-    return HttpResponse(f'Nome do Usuário: {username}')
+class UserView(View):
+    def get(self, request, username):
+        return HttpResponse(f'Nome do Usuário: {username}')
 
 
 def poema_text(request, poema_id):
@@ -51,6 +57,11 @@ def poema_detail(request):
     return render(request, 'poema_detail.html', {'poetry': poetry})
 
 
+def lista_livros(request):
+    livros = Livro.objects.filter()
+    return render(request, 'lista_livros.html', {'livros': livros})
+
+
 # Tag for
 def poema_list(request):
     poesias = [fazer_poema() for _ in range(8)]
@@ -73,20 +84,21 @@ def search(request):
 # Register Form
 
 
-def register_view(request):
-    if request.POST:
-        form = RegisterForm(request.POST)
-        if form.is_valid():
-            # processar dados se forem válidos
-            user = form.save(commit=False)
-            user.set_password(user.password)
-            user.save()
-            request.session['message'] = "Registro bem-sucedido!"
-            return redirect('/')
-    else:
-        form = RegisterForm()
+class RegisterView(FormView):
+    template_name = 'register.html'  # Nome do template que será usado
+    form_class = RegisterForm
+    success_url = reverse_lazy('/')  # URL para redirecionar após o sucesso
 
-    return render(request, 'register_view.html', {'form': form})
+    def form_valid(self, form):
+        # Este método é chamado quando dados válidos são postados no formulário
+        user = form.save(commit=False)
+        user.set_password(user.password)
+        user.save()
+
+        # Configurando uma mensagem para a sessão
+        self.request.session['message'] = "Registro bem-sucedido!"
+        return super().form_valid(form)
+
 
 # Login
 
